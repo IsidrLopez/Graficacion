@@ -124,41 +124,39 @@
 //}
 
 // Ejercicio 7
-let x7 = 200;
-let y7 = 50;
-let vx7 = 2;
-let vy7 = 0;
-let gravedad = 0.5;
+   //let x7 = 200;
+//let y7 = 50;
+//let vx7 = 2;
+//let vy7 = 0;
+//let gravedad = 0.5;
 //let radio = 20;
 
-function setup() {
-    createCanvas(400, 300);
-}
+//function setup() {
+    //createCanvas(400, 300);
+//}
 
-function draw() {
-    background(220);
+//function draw() {
+    //background(220);
+
+    //circle(x7, y7, radio*2);
     
-    // Dibujar círculo
-    circle(x7, y7, radio*2);
+    //vy7 += gravedad;
     
-    vy7 += gravedad;
+    //x7 += vx7;
+    //y7 += vy7;
     
-    // Mover
-    x7 += vx7;
-    y7 += vy7;
+    //if (y7 > height - radio) {
+        //y7 = height - radio;
+        //vy7 = -vy7 * 0.8; 
+    //}
     
-    if (y7 > height - radio) {
-        y7 = height - radio;
-        vy7 = -vy7 * 0.8; 
-    }
+    //if (x7 > width - radio || x7 < radio) {
+        //vx7 = -vx7;
+    //}
     
-    if (x7 > width - radio || x7 < radio) {
-        vx7 = -vx7;
-    }
-    
-    text(`vy = ${vy7.toFixed(1)}`, 10, 20);
-    text(`Energía: ${((vx7*vx7 + vy7*vy7)/2).toFixed(1)}`, 10, 40);
-}
+    //text(`vy = ${vy7.toFixed(1)}`, 10, 20);
+    //text(`Energía: ${((vx7*vx7 + vy7*vy7)/2).toFixed(1)}`, 10, 40);
+//}
 
 // Ejercicio 8
 let x8 = 0;
