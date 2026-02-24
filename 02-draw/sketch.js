@@ -1,126 +1,127 @@
 // Ejercicio 1 
-let x =0;
-function setup() {
-  createCanvas(600, 200);
-  background(220);
-}
+  //let x =0;
+  //function setup() {
+  //createCanvas(600, 200);
+  //background(220);
+//}
 
-function draw() {
-  background(220);
-  circle(x, height/2, 40);
-  x = x + 3;
-  fill(0);
-  text(`Frame: ${frameCount}`, 10, 20);
-  text(`Posición x: ${Math.round(x)}`, 10, 40);
-}
+  //function draw() {
+  //background(220);
+  //circle(x, height/2, 40);
+  //x = x + 3;
+  //fill(0);
+  //text(`Frame: ${frameCount}`, 10, 20);
+  //text(`Posición x: ${Math.round(x)}`, 10, 40);
+//}
 
 // Ejercicio 2
-let x2 = 0;
- function setup() {
-    createCanvas(600, 200);
-}
+//let x2 = 0;
+ //function setup() {
+    //createCanvas(600, 200);
+//}
 
-function draw() {
-    circle(x2, height/2, 40);
-    x2 += 3;
-    if (x2 > width + 20) {
-        x2 = -20;
-    }
-}
+//function draw() {
+    //circle(x2, height/2, 40);
+    //x2 += 3;
+    //if (x2 > width + 20) {
+        //x2 = -20;
+    //}
+//}
 
 // Ejercicio 3
-let x3 = 0;
+//let x3 = 0;
 
-function setup() {
-    createCanvas(600, 200);
-    frameRate(30);
-}
+//function setup() {
+    //createCanvas(600, 200);
+    //frameRate(30);
+//}
 
-function draw() {
-    background(220);
-    circle(x3, height/2, 40);
-    x3 += 3;
+//function draw() {
+    //background(220);
+    //circle(x3, height/2, 40);
+    //x3 += 3;
     
+    //text(`FPS: ${frameRate().toFixed(1)}`, 10, 20);
+    //text(`Frame: ${frameCount}`, 10, 40);
     
-    text(`FPS: ${frameRate().toFixed(1)}`, 10, 20);
-    text(`Frame: ${frameCount}`, 10, 40);
-    
-    if (x3 > width + 20) {
-        x3 = -20;
-    }
-}
+    //if (x3 > width + 20) {
+        //x3 = -20;
+    //}
+//}
 
 // Ejercicio 4
-let y = 0;
+//let y = 0;
 
-function setup() {
-    createCanvas(200, 400);
-}
+//function setup() {
+    //createCanvas(200, 400);
+//}
 
-function draw() {
-    background(220);
-    circle(width/2, y, 40);
-    y += 3;
+//function draw() {
+    //background(220);
+    //circle(width/2, y, 40);
+    //y += 3;
     
-    if (y > height + 20) {
-        y = -20;
-    }
-}
+    //if (y > height + 20) {
+        //y = -20;
+    //}
+//}
+
  // Ejercicio 5
    //let x = 0;
-let velocidad = 3;
+//let velocidad = 3;
 
-function setup() {
-    createCanvas(600, 200);
-}
+//function setup() {
+    //createCanvas(600, 200);
+//}
 
-function draw() {
-    background(220);
+//function draw() {
+    //background(220);
     
-    circle(x, height/2, 40);
+    //circle(x, height/2, 40);
     
-    x += velocidad;
+    //x += velocidad;
     
-    if (x > width - 20 || x < 20) {
-        velocidad = -velocidad;
-    }
+    //if (x > width - 20 || x < 20) {
+        //velocidad = -velocidad;
+    //}
     
-    fill(0);
-    text(`Posición: ${Math.round(x)}`, 10, 20);
-    text(`Velocidad: ${velocidad}`, 10, 40);
-    text(`Frame: ${frameCount}`, 10, 60);
+    //fill(0);
+    //text(`Posición: ${Math.round(x)}`, 10, 20);
+    //text(`Velocidad: ${velocidad}`, 10, 40);
+    //text(`Frame: ${frameCount}`, 10, 60);
     
-}
+//}
+
 // Ejercicio 6
-let x6 = 200;
-let y6 = 100;
-let vx = 4;
-let vy = 3;
-let radio = 20;
+//let x6 = 200;
+//let y6 = 100;
+//let vx = 4;
+//let vy = 3;
+//let radio = 20;
 
-function setup() {
-    createCanvas(400, 300);
-}
+//function setup() {
+    //createCanvas(400, 300);
+//}
 
-function draw() {
-    background(220);
+//function draw() {
+    //background(220);
     
-    circle(x6, y6, radio*2);
+    //circle(x6, y6, radio*2);
     
-    x6 += vx;
-    y6 += vy;
+    //x6 += vx;
+    //y6 += vy;
     
-    if (x6 > width - radio || x6 < radio) {
-        vx = -vx;
-    }
+    //if (x6 > width - radio || x6 < radio) {
+        //vx = -vx;
+    //}
     
-    if (y6 > height - radio || y6 < radio) {
-        vy = -vy;
-    }
+    //if (y6 > height - radio || y6 < radio) {
+       // vy = -vy;
+    //}
     
-    text(`vx = ${vx}`, 10, 20);
-    text(`vy = ${vy}`, 10, 40);
-}
+    t//ext(`vx = ${vx}`, 10, 20);
+    //text(`vy = ${vy}`, 10, 40);
+//}
 
 // Ejercicio 7
 let x7 = 200;
