@@ -1,16 +1,10 @@
-function setup() {
-  createCanvas(600, 400);
-  
-}
+// Ejercicio 1
+fill(255, 80, 80);
+circle(80, 100, 80);
+fill(80, 220, 160);
+circle(200, 100, 80);
+fill(80, 160, 255);
+circle(320, 100, 80);
 
-function draw() {
-  background(255);
-  fill(052,500, 22);
-  rect(0 , 0, innerWidth, height/2);
-  fill(0, 86 , 147);
-  rect(0, height/2, widht, height/4);
-  fill(276, 17, 38);
-  rect(0, height*3/4, width, height/4);
-
-  
-}
+// Ejercicio 2
+strokeWeight(1);
