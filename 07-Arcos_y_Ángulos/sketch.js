@@ -1,22 +1,5 @@
 // Ejercicio 1
-fill(255, 80, 80);
-circle(80, 100, 80);
-fill(80, 220, 160);
-circle(200, 100, 80);
-fill(80, 160, 255);
-circle(320, 100, 80);
-
-// Ejercicio 2
-let L= 180, cx=200, cy=115;
-let h = L * sqrt(3) /2;
-triangle(
-  cx-L/2, cy+h/2,
-  cx-L/2, cy+h/2,
-  cx,     cy+h/2,
-);
-
-// Ejercicio 3
-arc(200, 115, 200, 200, 0, PI, CHORD);
+arc(200, 110, 180, 180, 0, HALF_PI);
 
 // Ejercicio 4
 let cols= [[220,40,40],[240,240,240],
