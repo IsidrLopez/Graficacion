@@ -1,36 +1,34 @@
 // Ejercicio 1
 arc(200, 110, 180, 180, 0, HALF_PI);
 
-// Ejercicio 4
-let cols= [[220,40,40],[240,240,240],
-           [220,40,40],[240,240,240],[220,40,40]];
-for (let i=0; i<5; i++){
-  fill(...cols[i]);
-  circle(200, 110, 200 - i*35);
+// Ejercicio 2
+arc(200, 110, 180, 180, PI, TWO_PI);
+
+// Ejercicio 3
+for (let i=0; i<12; i++){
+  let a = (TWO_PI/12)*i - HALF_PI;
+  let x1=cx+r1*cos(a), y1=cy+r1*sin(a);
+  let x2=cx+r1*cos(a), y2=cy+r1*sin(a);
+
 }
+
+// Ejercicio 4
+let a1 = frameCount * 0.04;
+let a2 = frameCount * 0.008;
+
+line(cx, cy, cx+r*0.8*cos(a1), cy+r*0.8*sin(a1));
+line(cx, cy, cx+r*0.5*cos(a2), cy+r*0.5*sin(a2));
 
 // Ejercicio 5
-fill(160,120,70);
-rect(120,30,160,160,4);
-fill(140,200,255,80);
-rect(128,38,144,144);
-stroke(160,120,70);
-strokeWeight(6);
-line(200,38,200,182);
-line(128,110,272,110);
+function draw(){
+  let s = (second()/60) * TWO_PI - HALF_PI;
+  let m = (minuto()/60) * TWO_PI - HALF_PI;
+  let h = (hour()  /12) * TWO_PI - HALF_PI;
 
-// Ejercicio 6
-let n=8, r=55, cx=200, cy=110;
-for (let i=0; ilet a = (TWO_PI/n)*i;
-  circle(cx+r*cos(a), cy+r*sin(a), 50);
+  line(cx,cy, cx+r*0.9*cos(s), cy+r*0.9*sin(s));
+
+  line(cx,cy, cx+r*0.75*cos(m), cy+r*0.75*sin(m));
+
+  line(cx,cy, cx+r*0.5*cos(h), cy+r*0.5*sin(h));
+
 }
-cricle(cx, cy, 45);
-
-// Ejercicio 7
-let n=6, cx=200, cy=110, r=88;
-beginShape();
-for (let i=0; ilet a = (TWO_PI)*i - HALF_PI;
-     vertex(cx+r*cos(a), cy+r*sin(a))
-
-     }
-     endShape(CLOSE);
