@@ -31,7 +31,7 @@ function draw() {
   // Cielo degradado
   for(let y = 0; y < height * 0.7; y++){
     let t = y / (height * 0.7);
-    stroke(lerpColor(color(10,15,40), color (30,20,60), t));
+    stroke(lerpColor(color(10, 15, 40), color (30, 20, 60), t));
     line(0, y, width, y);
 
   }
@@ -73,6 +73,9 @@ function draw() {
   // Casa
   dibujarCasa(280, height * 0.68);
 
+  // Reloj analogico
+  dibujarReloj(100, 100, 55);
+
   // Informacion en pantalla
   noStroke();
   fill(255, 255, 255, 70);
@@ -82,6 +85,17 @@ function draw() {
   text('viento: '+ (viento > 0 ? '->' : '<-') + nf(abs(viento), 1, 1), 12, 12);
   text('frame:  '+ frameCount, 12, 28);
   text('clic -> pausar / reanudar', 12, 44);
+}
+
+// Reloj
+function dibujarReloj(cx, cy, r) {
+  noFill();
+  stroke(255, 255, 255, 120);
+  strokeWeight(2);
+  circle(cx, cy, r * 2);
+
+  for(let i = 0; i < 12, i++) {
+    let a = (TWO_PI / 12) * i  }
 }
 
 // Funciones Auxiliares
@@ -145,7 +159,7 @@ function dibujarCasa(x, baseY){
     fill(200, 200, 210, 60 - i * 12);
     circle(
       x + 110 + sin(frameCount * 0.05 + i) * 6,
-      baseY - 195 - i * 15,
+      baseY - 162 - i * 17,
       18 + i *4
     );
   }

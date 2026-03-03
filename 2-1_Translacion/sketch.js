@@ -1,8 +1,10 @@
 let tx = 0;
 function setup(){
+  createCanvas(600, 300);
   rectMode(CENTER);
 
 }
+
 function draw() {
   background(240);
   tx += 2;
