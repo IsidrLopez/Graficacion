@@ -35,21 +35,53 @@ function draw() {
       let t = y / (height * 0.7);
       stroke(lerpColor(color(10, 15, 40), color (30, 20, 60), t));
       line(0, y, width, y);
-
+    }
+  } else {
+    // Cielo diurno degradado azul
+    for(let y = 0; y < height * 0.7; y++){
+      let t = y / (height * 0.7);
+      stroke(lerpColor(color(100, 180, 255), color (180, 220, 255), t));
+      line(0, y, width, y);
+    }
   }
-  }
 
-  // Cielo degradado
-  
-
-  // Estrellas parpadeantes
+// Estrellas (solo de noche)
+if(esNoche){
   estrellas.forEach(s => {
     let brillo = map(sin(frameCount * 0.05 + s.fase), -1, 1, 120, 255);
     stroke(brillo);
     strokeWeight(s.r);
     point(s.x, s.y);
   });
-  
+}
+ // Luna o Sol
+ if (esNoche){
+  noStroke();
+  fill(255, 248, 200);
+  circle(580, 70, 80);
+  fill(25, 18, 50);
+  circle(600, 65, 70);
+ } else {
+  // Sol con rayos animados
+  noStroke();
+  fill(255, 220, 50);
+  circle(580, 70, 80);
+  // Rayos
+  stroke(255, 220, 50, 180);
+  strokeWeight(2);
+  for ( let i = 0; i < 8; i++){
+    let a = (TWO_PI / 8) * i * frameCount * 0.01;
+    let ini = 45;
+    let fin = 58 + sin(frameCount * 0.05 + i ) * 4;
+    line(
+      580 + ini * cos(a), 70 + ini * sin(a),
+      580 + fin * cos(a), 70 + fin * sin(a)
+    );
+  }
+ }
+
+ 
+
   // Luna
   noStroke();
   fill(255, 248, 200);
