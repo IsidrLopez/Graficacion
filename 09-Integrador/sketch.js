@@ -27,14 +27,20 @@ function setup() {
 
 function draw() {
   let viento = (mouseX / width - 0.5) * 20;
-
-  // Cielo degradado
-  for(let y = 0; y < height * 0.7; y++){
-    let t = y / (height * 0.7);
-    stroke(lerpColor(color(10, 15, 40), color (30, 20, 60), t));
-    line(0, y, width, y);
+  
+  // Cielo
+  if (esNoche) {
+    // Cielo Nocturno
+    for(let y = 0; y < height * 0.7; y++){
+      let t = y / (height * 0.7);
+      stroke(lerpColor(color(10, 15, 40), color (30, 20, 60), t));
+      line(0, y, width, y);
 
   }
+  }
+
+  // Cielo degradado
+  
 
   // Estrellas parpadeantes
   estrellas.forEach(s => {
@@ -94,9 +100,44 @@ function dibujarReloj(cx, cy, r) {
   strokeWeight(2);
   circle(cx, cy, r * 2);
 
-  for(let i = 0; i < 12, i++) {
-    let a = (TWO_PI / 12) * i  }
-}
+// 12 marcas de hora
+  for (let i = 0; i < 12; i++) {
+    let a     = (TWO_PI / 12) * i - HALF_PI;
+    let largo = (i % 3 === 0) ? 10 : 5;
+    stroke(255, 255, 255, 150);
+    strokeWeight(i % 3 === 0 ? 2 : 1);
+    line(
+      cx + (r - largo) * cos(a), cy + (r - largo) * sin(a),
+      cx +  r          * cos(a), cy +  r          * sin(a),
+    )};
+
+
+  // Angulos con hora real del sistema
+  let s = (second() / 60)       * TWO_PI - HALF_PI;
+  let m = (minute() / 60)       * TWO_PI - HALF_PI;
+  let h = ((hour() % 12) / 12)    * TWO_PI - HALF_PI
+          + (minute() / 60) * (TWO_PI / 12);
+  
+  // Manecilla horaria
+  stroke(255, 255, 255, 200);
+  strokeWeight(4);
+  line(cx, cy, cx + r * 0.5 * cos(h), cy + r * 0.5 *  sin(h));
+
+  // Manecilla minutera
+  stroke(255, 255, 255, 220);
+  strokeWeight(3);
+  line(cx, cy, cx + r * 0.75 * cos(m), cy + r * 0.75 *  sin(m));
+
+  // Segundero
+  stroke(255, 80, 80, 230);
+  strokeWeight(1.5);
+  line(cx, cy, cx + r * 0.9 * cos(s), cy + r * 0.9 *  sin(s));
+  
+  // Centro
+  fill(255);
+  noStroke();
+  circle(cx, cy, 6);
+} 
 
 // Funciones Auxiliares
 function dibujarNube(x, y){
