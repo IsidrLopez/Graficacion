@@ -1,6 +1,7 @@
 let estrellas = [];
 let nubes     = [];
 let corriendo = true;
+let esNoche   = true;
 
 function setup() {
   createCanvas(700,420);
@@ -31,14 +32,14 @@ function draw() {
   // Cielo
   if (esNoche) {
     // Cielo Nocturno
-    for(let y = 0; y < height * 0.7; y++){
+    for (let y = 0; y < height * 0.7; y++){
       let t = y / (height * 0.7);
       stroke(lerpColor(color(10, 15, 40), color (30, 20, 60), t));
       line(0, y, width, y);
     }
   } else {
     // Cielo diurno degradado azul
-    for(let y = 0; y < height * 0.7; y++){
+    for (let y = 0; y < height * 0.7; y++){
       let t = y / (height * 0.7);
       stroke(lerpColor(color(100, 180, 255), color (180, 220, 255), t));
       line(0, y, width, y);
@@ -69,8 +70,8 @@ if(esNoche){
   // Rayos
   stroke(255, 220, 50, 180);
   strokeWeight(2);
-  for ( let i = 0; i < 8; i++){
-    let a = (TWO_PI / 8) * i * frameCount * 0.01;
+  for (let i = 0; i < 8; i++){
+    let a = (TWO_PI / 8) * i + frameCount * 0.01;
     let ini = 45;
     let fin = 58 + sin(frameCount * 0.05 + i ) * 4;
     line(
@@ -80,36 +81,27 @@ if(esNoche){
   }
  }
 
- 
-
-  // Luna
-  noStroke();
-  fill(255, 248, 200);
-  circle(580, 70, 80);
-  fill(25, 18, 50);
-  circle(600, 65, 70);
-
   // Nubes
   nubes.forEach(n => {
     n.x += n.vel + viento * 0.1;
     if (n.x > width + 100) n.x = -100;
     if (n.x < -100)        n.x = width + 100;
-    dibujarNube(n.x, n.y);
+    dibujarNube(n.x, n.y, esNoche);
   });
 
   // Terreno
   noStroke();
-  fill(20, 50, 30);
+  fill(esNoche ? color(20, 50, 30) : color(80, 160, 60));
   rect(0, height * 0.68, width, height * 0.32);
 
   // Arboles con viento
-    dibujarArbol(80, height *0.68, viento, true);
-    dibujarArbol(160, height *0.68, viento, false);
-    dibujarArbol(530, height *0.68, viento, true);
-    dibujarArbol(620, height *0.68, viento, false);
+    dibujarArbol(80,  height * 0.68, viento, true,  esNoche);
+    dibujarArbol(160, height * 0.68, viento, false, esNoche);
+    dibujarArbol(530, height * 0.68, viento, true,  esNoche);
+    dibujarArbol(620, height * 0.68, viento, false, esNoche);
 
   // Casa
-  dibujarCasa(280, height * 0.68);
+  dibujarCasa(280, height * 0.68, esNoche);
 
   // Reloj analogico
   dibujarReloj(100, 100, 55);
@@ -123,6 +115,7 @@ if(esNoche){
   text('viento: '+ (viento > 0 ? '->' : '<-') + nf(abs(viento), 1, 1), 12, 12);
   text('frame:  '+ frameCount, 12, 28);
   text('clic -> pausar / reanudar', 12, 44);
+  text('D = dia | N = noche', 12, 60);
 }
 
 // Reloj
@@ -140,7 +133,7 @@ function dibujarReloj(cx, cy, r) {
     strokeWeight(i % 3 === 0 ? 2 : 1);
     line(
       cx + (r - largo) * cos(a), cy + (r - largo) * sin(a),
-      cx +  r          * cos(a), cy +  r          * sin(a),
+      cx +  r          * cos(a), cy +  r          * sin(a)
     )};
 
 
@@ -172,20 +165,20 @@ function dibujarReloj(cx, cy, r) {
 } 
 
 // Funciones Auxiliares
-function dibujarNube(x, y){
+function dibujarNube(x, y, noche){
   noStroke(); 
-  fill(200, 200, 230, 60);
+  fill(noche ? color(200, 200, 230, 60) : color(255, 255, 255, 220));
   ellipse(x,    y,    80, 40);
   ellipse(x + 30, y - 15, 60, 40);
   ellipse(x - 25, y - 10, 50, 35);
 }
 
-function dibujarArbol(x, baseY, viento, grande){
+function dibujarArbol(x, baseY, viento, grande, noche){
   let h = grande ? 120: 90;
   let incl = sin(frameCount * 0.03) * 3 + viento * 0.4;
 
   // Tronco
-  stroke(100, 70, 48); 
+  stroke(noche ? color(80, 55, 35) : color(120, 80, 40)); 
   strokeWeight(6);
   line(x, baseY, x + incl, baseY - h);
 
@@ -200,9 +193,9 @@ function dibujarArbol(x, baseY, viento, grande){
 }
 
 // Casa
-function dibujarCasa(x, baseY){
+function dibujarCasa(x, baseY, noche){
   // Cuerpo
-  fill(180, 140, 100);
+  fill(noche ? color(180, 140, 100) : color (230, 190, 150));
   noStroke();
   rect(x, baseY - 100, 140, 100);
 
@@ -218,8 +211,8 @@ function dibujarCasa(x, baseY){
   fill(100, 70, 40);
   rect(x + 55, baseY - 55, 30, 55);
 
-  // Ventana con luz
-  fill(255, 230, 100, 200);
+  // Ventana con luz - sin luz de dia
+  fill(noche ? color(255, 230, 100, 200) : color(180, 220, 255,200));
   rect(x + 15, baseY - 80, 30, 30);
   rect(x + 95, baseY - 80, 30, 30);
 
@@ -228,23 +221,35 @@ function dibujarCasa(x, baseY){
   rect(x + 100, baseY - 155, 20, 30);
 
   // Humo
-  for (let i = 0; i < 4; i++){
-    fill(200, 200, 210, 60 - i * 12);
-    circle(
-      x + 110 + sin(frameCount * 0.05 + i) * 6,
-      baseY - 162 - i * 17,
-      18 + i *4
-    );
+  if (noche){
+    for (let i = 0; i < 4; i++){
+      fill(200, 200, 210, 60 - i * 12);
+      circle(
+        x + 110 + sin(frameCount * 0.05 + i) * 6,
+        baseY - 162 - i * 17,
+        18 + i *4
+      );
+    }
+  }
+}
+  
+function keyPressed() {
+  if (key === 'd' || key === 'D') esNoche = false;
+  if (key === 'n' || key === 'N') esNoche = true;
+  redraw(); // fuerza un frame aunque esté en noLoop()
+}
+
+// CLIC: pausar / reanudar 
+function mousePressed() {
+  if (mouseButton === LEFT) {
+    if (corriendo) { noLoop(); } else { loop(); }
+    corriendo = !corriendo;
+  }
+  if (mouseButton === RIGHT) {
+    esNoche = !esNoche;
+    redraw();
   }
 }
 
-// Interaccion:
-function mousePressed(){
-  if (corriendo){
-    noLoop();
-  } else {
-    loop();
-  }
-  corriendo = !corriendo;
-}
-
+// Evitar menú contextual del navegador
+document.addEventListener('contextmenu', e => e.preventDefault());
