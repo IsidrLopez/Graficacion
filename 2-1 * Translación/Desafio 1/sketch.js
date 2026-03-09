@@ -1,6 +1,9 @@
-let x = 50, y = 120;
-let vx = 2, vy = 1;
-let w = 80, h = 50;
+let x = 50 
+y = 120;
+let vx = 2 
+vy = 1;
+let w = 80
+h = 50;
 
 function setup() {
   createCanvas(600, 300);
