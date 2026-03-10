@@ -1,13 +1,11 @@
 //Ejercicio 1 
-  let x = 0, vel = 5;
-  function setup(){
-    createCanvas(400,200);{
-        background(30);
-        circle(x, 100, 40);
-        x += vel;
-        if (x > width) x=0;
-    }
-  }
+  function setup() { createCanvas(400, 200); }
+function draw() {
+  background(30);
+  circle(x, 100, 40);
+  x += vel;
+  if (x > width) x = 0;
+}
 // Ejercicio 2
 let y = 0, vel = 3;
 function setup(){

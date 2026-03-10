@@ -15,6 +15,14 @@ function draw(){
 
   // Factor de escala oscilante
   let s = 1 + A * sin(omega * frameCount);
+
   push();
+  translate(width / 2, height / 2);
+  scale(s);
+  fill(60, 180, 120);
+  rect(0, 0 , 120, 60);
+  pop();
+
+
 
 }
