@@ -144,3 +144,4 @@ function draw() {
   fill(30);
   textSize(11);
   text("Color = (R,G,B) | 256³ = 16,777,216 colores posibles", 10, height - 5);
+}
