@@ -41,8 +41,8 @@ function draw(){
   fill(40);
   textSize(12);
   textFont('monospace');
-  text('a = ${nf(alpha, 1, 3)}', 10, 20);
-  text('x = ${nf(x, 1, 1,)} y=${nf(y, 1, 1)}', 10, 36); 
+  text('a = {(alpha, 1, 3)}', 10, 20);
+  text('x = {(x, 1, 1,)} y={(y, 1, 1)}', 10, 36); 
   text('mas rapido  mas lento | mueve el mouse ', 10, height - 10);
 }
 
@@ -89,10 +89,10 @@ noStroke();
 fill(40);
 textSize(12);
 textFont('monospace');
-text('x=${nf(x, 1, 1)} y=${nf(y, 1, 1)}', 10,20);
-text('vx=${vx} vy=${vy}', 10, 36); 
+text('x=(x, 1, 1)} y=(y, 1, 1)}', 10,20);
+text('vx={vx} vy={vy}', 10, 36); 
 text('Flechas : cambiar velocidad | R: reiniciar', 10, height - 10);
-}
+
 
 function keyPressed(){
   // Cambiar velocidad con teclas de flecha
