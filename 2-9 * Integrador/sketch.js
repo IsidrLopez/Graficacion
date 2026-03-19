@@ -1,12 +1,7 @@
 // PROYECTO INTEGRADOR — UNIDAD 2
 // Escena 2D Interactiva: Transformaciones + Bézier + Fractal + Texto
-// Alumno  : Isidro López     No. Control: 24170608
-// Materia : Graficación
-// Profesor: Dr. Juan Gabriel Loaiza
-// Instituto Tecnológico de Culiacán — 2026
-// ============================================================
- 
-// ── VARIABLES GLOBALES ───────────────────────────────────────
+
+// Variables Globales
  
 // Cohete
 let coheteS, coheteAng, coheteShear, coheteT;
@@ -26,7 +21,7 @@ let estrellas = [];
 // Objeto activo para controles
 let objetoActivo; // 'cohete' | 'robot'
  
-// ── SETUP ────────────────────────────────────────────────────
+// Setup
 function setup() {
   createCanvas(900, 560);
   // Generar estrellas una sola vez
@@ -69,7 +64,7 @@ function resetTodo() {
   objetoActivo = 'cohete';
 }
  
-// ── DRAW ─────────────────────────────────────────────────────
+// Draw
 function draw() {
   dibujarFondo();
   moverObjetos();
@@ -79,7 +74,7 @@ function draw() {
   seccionTexto();
 }
  
-// ── FONDO ESPACIAL ───────────────────────────────────────────
+// Fondo Espacial
 function dibujarFondo() {
   // Degradado noche: azul oscuro → negro
   for (let y = 0; y < height; y++) {
@@ -137,7 +132,7 @@ function dibujarFondo() {
   }
 }
  
-// ── MOVIMIENTO CON TECLAS ─────────────────────────────────────
+// Movimiento con Teclas
 function moverObjetos() {
   let spd = 3;
   if (keyIsDown(87)) robotY -= spd;
@@ -148,7 +143,7 @@ function moverObjetos() {
   robotY = constrain(robotY, 60, height - 60);
 }
  
-// ── ROBOT ─────────────────────────────────────────────────────
+// Robot
 function seccionRobot() {
   // Sombra en el suelo
   noStroke();
@@ -258,7 +253,7 @@ function dibujarRobot() {
   circle(-2, -72, 4);
 }
  
-// ── COHETE ────────────────────────────────────────────────────
+// Cohete
 function dibujarCohete() {
   rectMode(CENTER);
   noStroke();
@@ -322,7 +317,7 @@ function dibujarCohete() {
   text('ROCKET', 0, 22);
 }
  
-// ── BÉZIER ────────────────────────────────────────────────────
+// Bézier
 function seccionBezier() {
   // Polígono de control — línea punteada neón
   stroke(255, 200, 80, 60);
@@ -406,7 +401,7 @@ function seccionBezier() {
   }
 }
  
-// ── FRACTAL ───────────────────────────────────────────────────
+// Fractal
 function seccionFractal() {
   push();
     translate(820, height - 42);
@@ -442,7 +437,7 @@ function arbol(len, nivel) {
   push(); rotate( fAng); arbol(len * fFactor, nivel - 1); pop();
 }
  
-// ── TEXTO 2D ──────────────────────────────────────────────────
+// Texto 2D
 function seccionTexto() {
   // Panel HUD superior
   noStroke();
@@ -493,7 +488,7 @@ function seccionTexto() {
   textAlign(LEFT);
 }
  
-// ── TECLADO ───────────────────────────────────────────────────
+// Teclado
 function keyPressed() {
   if (keyCode === TAB) {
     objetoActivo = (objetoActivo === 'cohete') ? 'robot' : 'cohete';
@@ -523,7 +518,7 @@ function keyPressed() {
   if (key === 'r' || key === 'R') resetTodo();
 }
  
-// ── BÉZIER — ARRASTRAR ────────────────────────────────────────
+// Bézier - Arrastrar
 function mousePressed() {
   for (let i = 1; i <= 2; i++) {
     if (dist(mouseX, mouseY, bp[i].x, bp[i].y) < 14) {
