@@ -20,6 +20,7 @@ function draw(){
   line(0, 0, 0, 0, 0, 200);
 
   // Cubo giratorio en X y Y
+  push();
   noStroke();
   fill(220, 180, 60);
   rotateX(frameCount * 0.01);
