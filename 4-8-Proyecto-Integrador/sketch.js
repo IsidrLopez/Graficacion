@@ -1,78 +1,93 @@
-// Proyecto Integrador – Unidad 4 – Graficación p5.js WEBGL
-// Isidro López Pacheco – 24170608
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-let moverLuz = true; // controla si la luz sigue al mouse
+// ════════════════════════════════════════════════════════════════════════════
+// Proyecto Integrador — Unidad 4
+// Graficación con p5.js — Iluminación y Sombreado 3D
+// Sistema Solar 3D: Sol · Planeta · Luna · Toroide
+//
+// Alumno : Isidro López Pacheco
+// No. Ctrl: 24170608
+// Materia : Graficación — ITC 2026
+// Docente : Dr. Juan Gabriel Loaiza
+// ════════════════════════════════════════════════════════════════════════════
+ 
+let anguloOrb   = 0;
+let anguloLuna  = 0;
+let moverLuz    = true;
+let pausado     = false;
+let planetaMate = true;
+ 
 function setup() {
-createCanvas(800, 500, WEBGL);
-textFont('monospace');
+  createCanvas(800, 500, WEBGL);
 }
+ 
 function draw() {
-background(15, 15, 25); // fondo oscuro azulado
-orbitControl(); // permite rotar la cámara con el mouse
-// ■■ ILUMINACIÓN ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-ambientLight(45); // Ia: luz base
-directionalLight( // Id: luz direccional (simula sol)
-255, 255, 255,
-1, 1, -1
-);
-// Ip: luz puntual – sigue al mouse si moverLuz == true
-if (moverLuz) {
-pointLight(
-255, 220, 180,
-mouseX - width / 2,
-mouseY - height / 2,
-250
-);
-} else {
-pointLight(255, 220, 180, 0, -150, 250);
+  background(5, 5, 20);
+  orbitControl();
+ 
+  // ── ILUMINACIÓN ──────────────────────────────────────────────────────────
+  ambientLight(45);
+ 
+  directionalLight(255, 240, 200, 1, 1, -1);
+ 
+  if (moverLuz) {
+    pointLight(255, 220, 180, mouseX - width / 2, mouseY - height / 2, 300);
+  } else {
+    pointLight(255, 220, 180, 0, -200, 300);
+  }
+ 
+  // ── ANIMACIÓN ────────────────────────────────────────────────────────────
+  if (!pausado) {
+    anguloOrb  += 0.012;
+    anguloLuna += 0.040;
+  }
+ 
+  // ── SOL ──────────────────────────────────────────────────────────────────
+  push();
+  rotateY(frameCount * 0.008);
+  scale(1 + 0.05 * sin(frameCount * 0.03));
+  specularMaterial(255, 240, 100);
+  shininess(150);
+  noStroke();
+  sphere(90);
+  pop();
+ 
+  // ── PLANETA ──────────────────────────────────────────────────────────────
+  push();
+  rotateY(anguloOrb);
+  translate(220, 0, 0);
+  rotateY(frameCount * 0.022);
+ 
+  if (planetaMate) {
+    ambientMaterial(60, 140, 220);
+  } else {
+    specularMaterial(80, 160, 240);
+    shininess(60);
+  }
+  noStroke();
+  sphere(45);
+ 
+  // ── LUNA (anidada en el planeta) ─────────────────────────────────────────
+  push();
+  rotateY(anguloLuna);
+  translate(72, 0, 0);
+  specularMaterial(200, 200, 220);
+  shininess(40);
+  sphere(18);
+  pop();
+ 
+  pop();
+ 
+  // ── TOROIDE ──────────────────────────────────────────────────────────────
+  push();
+  rotateX(HALF_PI * 0.35);
+  rotateZ(frameCount * 0.005);
+  normalMaterial();
+  noStroke();
+  torus(170, 8);
+  pop();
 }
-// ■■ OBJETO 1: ESFERA BRILLANTE ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-// Simula material metálico / plástico brillante
-// Modelo: Is = ks(R·V)^n con shininess alto
-push();
-translate(-250, 0, 0);
-rotateY(frameCount * 0.012);
-specularMaterial(240, 240, 255); // Is: reflejo blanco-azulado
-shininess(120); // n alto = brillo concentrado
-sphere(85);
-pop();
-// ■■ OBJETO 2: CUBO MATE ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-// Simula material difuso (arcilla, madera, etc.)
-// Modelo: Id = kd(N·L)
-push();
-translate(0, 0, 0);
-rotateY(frameCount * 0.01);
-rotateX(frameCount * 0.005);
-ambientMaterial(200, 80, 80); // material mate rojo
-box(130);
-pop();
-// ■■ OBJETO 3: TOROIDE CON NORMALES ■■■■■■■■■■■■■■■■■■■■■■■■■■
-// Visualiza la dirección de las normales (RGB)
-// RGB = (Nx, Ny, Nz) -> color varía con la orientación
-push();
-translate(250, 0, 0);
-rotateX(frameCount * 0.012);
-rotateZ(frameCount * 0.006);
-normalMaterial();
-torus(70, 22);
-pop();
-// ■■ HUD: instrucciones en pantalla ■■■■■■■■■■■■■■■■■■■■■■■■■■
-// Se sale del espacio 3D para dibujar texto 2D
-push();
-// Resetear transformaciones 3D para texto plano
-let luzEstado = moverLuz ? 'ON (sigue mouse)' : 'OFF (fija)';
-ortho(); // proyección ortogonal para texto
-fill(200);
-noStroke();
-textSize(12);
-text('[ L ] Luz puntual: ' + luzEstado, -width/2 + 10, -height/2 + 20);
-text('[ Drag ] Rotar camara', -width/2 + 10, -height/2 + 38);
-text('Isidro Lopez – 24170608 – Unidad 4', -width/2 + 10, height/2 - 12);
-pop();
-}
-// ■■ INTERACCIÓN CON TECLADO ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ 
 function keyPressed() {
-if (key === 'L' || key === 'l') {
-moverLuz = !moverLuz; // alterna movimiento de la luz
-}
+  if (key === 'L' || key === 'l') moverLuz    = !moverLuz;
+  if (key === 'P' || key === 'p') pausado     = !pausado;
+  if (key === 'M' || key === 'm') planetaMate = !planetaMate;
 }
